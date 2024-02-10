@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
       itemType,
       description,
       vehicleType,
+      amountPaid,
       driverAssigned,
       expectedDeliveryDate,
     } = req.body;
@@ -32,6 +33,7 @@ router.post("/", async (req, res) => {
       itemType,
       description,
       vehicleType,
+      amountPaid,
       driverAssigned,
       expectedDeliveryDate,
     });
@@ -61,6 +63,19 @@ router.put("/:id", async (req, res) => {
     res.status(500).send(error.message);
   }
 });
+// Get all check-ins for a specific user ID
+router.get("/user/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const checkIns = await CheckIn.find({ idNumber: userId });
+
+    res.status(200).json(checkIns);
+  } catch (error) {
+    console.error('Error fetching check-ins for user:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 router.get("/", async (req, res) => {
   try {

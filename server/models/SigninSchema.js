@@ -23,6 +23,11 @@ const signupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    enum: ['driver', 'cashier'],
+    required: true,
+  },
 });
 
 const SignupModel = mongoose.model('Signup', signupSchema);

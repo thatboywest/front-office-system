@@ -1,4 +1,4 @@
-// Import necessary modules and dependencie
+// server/routes/login.js
 const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
@@ -21,17 +21,20 @@ router.post("/", async (req, res) => {
         .json({ error: "Invalid credentials. Please sign up or try again." });
     }
 
-    // Compare the provided password with the hashed password in the database
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      // Don't explicitly state whether the email or password is incorrect
       return res
         .status(401)
         .json({ error: "Invalid credentials. Please sign up or try again." });
     }
 
-    // Return success message along with user information
+    if (user.role === "cashier") {
+      return res.json({ redirect: "/home" });
+    } else if (user.role === "driver") {
+      return res.json({ redirect: "/driver" });
+    }
+
     res.status(200).json({ message: "Login successful", user });
   } catch (error) {
     console.error("Error:", error);
@@ -39,5 +42,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Export the router for use in other parts of the application
 module.exports = router;

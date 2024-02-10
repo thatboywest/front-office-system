@@ -10,7 +10,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.post("/", async (req, res) => {
-  const { name, stationId, email, password } = req.body;
+  const { name, stationId, email, password, role, } = req.body;
 
   try {
     // Check if the email is already registered
@@ -27,6 +27,7 @@ router.post("/", async (req, res) => {
       name,
       stationId,
       email,
+      role,
       password: hashedPassword,
     });
 

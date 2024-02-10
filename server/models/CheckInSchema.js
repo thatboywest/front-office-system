@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const checkInSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   customerName: { type: String, required: true },
@@ -22,6 +21,7 @@ const checkInSchema = new mongoose.Schema({
     enum: ["pending", "onroute", "delivered"],
     default: "pending",
   },
+  amountPaid: { type: Number, }, 
 },
 {timestamps:true,});
 
