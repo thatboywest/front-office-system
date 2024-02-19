@@ -15,7 +15,6 @@ router.post('/', async (req, res) => {
       return res.status(404).json({ error: 'Package not found' });
     }
 
-    // Assuming status is not nested within the document
     const packageStatus = foundDocument.status;
 
     res.status(200).json({ status: packageStatus });
