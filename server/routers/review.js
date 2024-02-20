@@ -5,7 +5,7 @@ const Review = require("../models/ReviewSchema");
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-// Route to get all reviews
+
 router.get('/', async (req, res) => {
     try {
         const reviews = await Review.find();
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Route to create a new review
+
 router.post('/', async (req, res) => {
     const { idNumber, review } = req.body;
 

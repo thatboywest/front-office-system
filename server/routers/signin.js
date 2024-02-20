@@ -18,8 +18,6 @@ router.post("/", async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: "Email is already in use" });
     }
-
-    // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user instance
@@ -31,10 +29,10 @@ router.post("/", async (req, res) => {
       password: hashedPassword,
     });
 
-    // Save the new user to the database
+    
     const savedUser = await newUser.save();
 
-    // Return success message along with user information
+    
     res.status(201).json({ message: "Signup successful", user: savedUser });
   } catch (error) {
     console.error("Error:", error);
@@ -42,5 +40,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Export the router for use in other parts of the application
 module.exports = router;

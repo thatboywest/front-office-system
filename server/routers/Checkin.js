@@ -63,7 +63,7 @@ router.put("/:id", async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-// Get all check-ins for a specific user ID
+
 router.get("/user/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
